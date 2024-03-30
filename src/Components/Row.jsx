@@ -22,6 +22,8 @@ const Row = ({ title, req }) => {
   const goLeft = () => {
     slider.current.scrollLeft += -500;
   };
+
+  
   return (
     <div>
       <h2 className="p-3  pb-0 md:text-xl  text-white relative group z-[99]">

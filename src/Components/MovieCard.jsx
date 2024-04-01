@@ -5,19 +5,23 @@ import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { db } from "../FireBase";
 
 const MovieCard = ({ data }) => {
+  // like
   const [like, setLike] = useState(false);
+  // get current User from store
   const { currentUser } = useContext(AuthContext);
-  const movieId = doc(db, "users", currentUser?.email);
-  console.log("movieId");
-  console.log(movieId);
+  // the movie ID
+  const movieId = doc(db, "Users", `${currentUser?.email}`);
+
   const likeClick = async () => {
     if (currentUser?.email) {
       setLike(!like);
+
+      // update Doc
       await updateDoc(movieId, {
         userList: arrayUnion({
           id: data?.id,
           title: data?.title,
-          image: data?.poster_path,
+          backdrop_path: data?.poster_path,
         }),
       });
     } else {

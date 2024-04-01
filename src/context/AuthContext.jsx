@@ -18,15 +18,16 @@ const AuthProviders = ({ children }) => {
 
   //sign Up [regester]
   const signUp = async (email, pass) => {
-    let res = await createUserWithEmailAndPassword(auth, email, pass);
+    await createUserWithEmailAndPassword(auth, email, pass);
+    email = String(email).toLocaleLowerCase();
     // we will catch any error when calling this fun
-    setDoc(doc(db,"users",email), {
+    setDoc(doc(db, "Users", email), {
       userList: [],
     });
   };
   // sign in [log in ]
   const signIn = async (email, pass) => {
-    let res = await signInWithEmailAndPassword(auth, email, pass);
+    await signInWithEmailAndPassword(auth, email, pass);
     // we will catch any error when calling this fun
   };
   // sign out [log in ]

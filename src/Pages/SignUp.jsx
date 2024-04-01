@@ -35,7 +35,7 @@ const SignUp = () => {
         <div className="absolute top-0 left-0 bg-black/50 w-full h-full"></div>
       </div>
       {/* form  */}
-      <form className="z-[4]  bg-black-20 p-10 w-full md:w-[350px]   rounded  bg-black/75">
+      <form className="z-[4]  bg-black-20 p-10 w-full md:w-[350px]   rounded  bg-black/75 sm:mt-0 mt-20">
         <h3 className=" text-2xl font-bold">Sign Up</h3>
         {error && <div className="p-3 bg-red-600 my-4 w-full ">{error}</div>}
         <div className="flex flex-col gap-3 mt-4">

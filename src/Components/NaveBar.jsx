@@ -23,10 +23,10 @@ const NaveBar = () => {
         {currentUser ? (
           <>
             <Link to="/UserProfile">
-              <button className=" p-2 px-5  mr-2 ">Profile</button>
+              <button className=" sm:p-2 sm:px-5  sm:mr-2 m-2 ">Profile</button>
             </Link>
             <button
-              className="buttonWithBg p-2 px-5 bg-red-600  rounded "
+              className="buttonWithBg sm:p-2 sm:px-5 p-2 m-2  bg-red-600  rounded "
               onClick={signOutClicked}
             >
               Sign Out
@@ -35,10 +35,10 @@ const NaveBar = () => {
         ) : (
           <>
             <Link to="/SignIn">
-              <button className=" p-2 px-5  mr-2 ">Sign In</button>
+              <button className="sm:p-2 sm:px-5  sm:mr-2 m-2 ">Sign In</button>
             </Link>
             <Link to="/SignUp">
-              <button className="buttonWithBg p-2 px-5 bg-red-600  rounded ">
+              <button className="buttonWithBg sm:p-2 sm:px-5  sm:mr-2 m-2 p-2 bg-red-600  rounded ">
                 Sign Up
               </button>
             </Link>

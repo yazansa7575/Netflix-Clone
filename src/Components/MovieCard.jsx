@@ -51,10 +51,10 @@ const MovieCard = ({ data, icon, allMovie }) => {
             data?.backdrop_path || data?.poster_path
           }`}
           alt={data?.title}
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover  "
         />
         <div className="duration-300 w-full h-full bg-transparent group-hover:bg-black/30   absolute top-0 left-0 p-2  "></div>
-        <p className="absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%] text-lg group-hover:visible  invisible font-bold">
+        <p className="absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%] text-sm md:text-lg group-hover:visible  invisible  font-bold break-words text-wrap">
           {data?.title}
         </p>
         <p

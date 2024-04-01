@@ -35,7 +35,7 @@ const MainPage = () => {
           />
           <div className=" absolute top-0 w-full h-full bg-gradient-to-r from-black "></div>
         </div>
-        <div className=" absolute top-[50%] translate-y-[-50%] p-4 md:p-8">
+        <div className=" absolute top-[60%] sm:top-[50%]  translate-y-[-50%] p-4 md:p-8 ">
           <h3 className=" font-bold md:text-4xl text-3xl">{movie?.title}</h3>
           <div className="flex gap-2 my-4">
             <button className="  font-bold py-2 px-4 text-black bg-white rounded">

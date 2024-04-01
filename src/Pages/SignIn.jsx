@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { stringSliceError } from "../Utilse";
 
 const SignIn = () => {
   let emailRef = useRef();
@@ -18,12 +19,12 @@ const SignIn = () => {
       await signIn(emailRef?.current?.value, passRef?.current?.value);
       nav("/");
     } catch (error) {
-      setError(error.code);
+      setError(stringSliceError(error.message));
     }
     setIsLoading(false);
   };
   return (
-    <div className=" relative flex items-center justify-center h-screen w-full">
+    <div className=" relative flex items-center justify-center min-h-screen">
       {/* bg-  */}
       <div className=" hidden md:block absolute top-0 left-0 z-[-4]  w-full h-full">
         <img
@@ -34,7 +35,7 @@ const SignIn = () => {
         <div className="absolute top-0 left-0 bg-black/50 w-full h-full"></div>
       </div>
       {/* form  */}
-      <form className="z-[4] mt-20 bg-black-20 p-10 w-full md:w-[350px] md:max-h-[500px]  rounded  bg-black/75">
+      <form className="z-[4]  bg-black-20 p-10 w-full md:w-[350px]  rounded  bg-black/75">
         <h3 className=" text-2xl font-bold">Sign In</h3>
         {error && <div className="p-3 bg-red-600 my-4 w-full ">{error}</div>}
         <div className="flex flex-col gap-3 mt-4">

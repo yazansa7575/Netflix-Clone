@@ -8,6 +8,7 @@ import SignUp from "./Pages/SignUp";
 import UserProfile from "./Pages/UserProfile";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import AuthProviders from "./context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRout";
 // react-router-dom
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -19,7 +20,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<MainPage />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/UserProfile" element={<UserProfile />} />
+          <Route
+            path="/UserProfile"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthProviders>
     </BrowserRouter>

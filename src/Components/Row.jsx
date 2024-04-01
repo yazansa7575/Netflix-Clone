@@ -11,7 +11,7 @@ const Row = ({ title, req }) => {
     (async () => {
       let res = await axios.get(req);
       setMovies(res?.data?.results);
-      console.log(res.data.results);
+      // console.log(res.data.results);
     })();
   }, []);
   // goRight

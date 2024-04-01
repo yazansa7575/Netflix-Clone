@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.VITE_FIREBASE_API_KEY,
-    authDomain: process.env.VITE_AUTH_DOMAIN,
-    projectId: process.env.VITE_PROJECT_ID,
-    storageBucket: process.env.VITE_STORGE_BUCKET,
-    messagingSenderId: process.env.VITE_SENDER_ID,
-    appId: process.env.VITE_APP_ID,
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORGE_BUCKET,
+    messagingSenderId: process.env.SENDER_ID,
+    appId: process.env.APP_ID,
 };
 
 // Initialize Firebase

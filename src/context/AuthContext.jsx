@@ -20,7 +20,7 @@ const AuthProviders = ({ children }) => {
   const signUp = async (email, pass) => {
     let res = await createUserWithEmailAndPassword(auth, email, pass);
     // we will catch any error when calling this fun
-    setDoc(doc(db, "users", email), {
+    setDoc(doc(db,"users",email), {
       userList: [],
     });
   };

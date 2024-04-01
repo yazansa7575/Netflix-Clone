@@ -1,8 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { AuthContext } from "../context/AuthContext";
+import { updateDoc, doc, arrayUnion } from "firebase/firestore";
+import { db } from "../FireBase";
 
 const MovieCard = ({ data }) => {
   const [like, setLike] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const movieId = doc(db, "users", currentUser?.email);
+  console.log("movieId");
+  console.log(movieId);
+  const likeClick = async () => {
+    if (currentUser?.email) {
+      setLike(!like);
+      await updateDoc(movieId, {
+        userList: arrayUnion({
+          id: data?.id,
+          title: data?.title,
+          image: data?.poster_path,
+        }),
+      });
+    } else {
+      alert("please login first");
+    }
+  };
   return (
     <>
       {/* movie_card  */}
@@ -19,7 +40,7 @@ const MovieCard = ({ data }) => {
           {data?.title}
         </p>
         <p
-          onClick={() => setLike(!like)}
+          onClick={likeClick}
           className="absolute top-2 left-2  text-lg group-hover:visible  invisible font-bold"
         >
           {like ? (

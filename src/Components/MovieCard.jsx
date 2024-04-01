@@ -4,28 +4,42 @@ import { AuthContext } from "../context/AuthContext";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { db } from "../FireBase";
 
-const MovieCard = ({ data }) => {
+const MovieCard = ({ data, icon, allMovie }) => {
   // like
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState();
   // get current User from store
   const { currentUser } = useContext(AuthContext);
   // the movie ID
   const movieId = doc(db, "Users", `${currentUser?.email}`);
 
-  const likeClick = async () => {
+  const iconClick = async () => {
+    // if user log in
     if (currentUser?.email) {
-      setLike(!like);
-
-      // update Doc
-      await updateDoc(movieId, {
-        userList: arrayUnion({
-          id: data?.id,
-          title: data?.title,
-          backdrop_path: data?.poster_path,
-        }),
-      });
+      // edit mode
+      if (icon === "del") {
+        // delete the movie when user click -x- button from array in frobt then push it to firebase
+        const resulte = allMovie.filter((e) => {
+          return e?.id !== data?.id;
+        });
+        // update Doc
+        await updateDoc(movieId, {
+          userList: resulte,
+        });
+      }
+      // default mode
+      else {
+        setLike(!like);
+        // update Doc
+        await updateDoc(movieId, {
+          userList: arrayUnion({
+            id: data?.id,
+            title: data?.title,
+            backdrop_path: data?.poster_path,
+          }),
+        });
+      }
     } else {
-      alert("please login first");
+      alert("please login first 😊");
     }
   };
   return (
@@ -44,10 +58,12 @@ const MovieCard = ({ data }) => {
           {data?.title}
         </p>
         <p
-          onClick={likeClick}
+          onClick={iconClick}
           className="absolute top-2 left-2  text-lg group-hover:visible  invisible font-bold"
         >
-          {like ? (
+          {icon ? (
+            <div className="text-white drop-shadow-md ">X</div>
+          ) : like ? (
             <FaHeart className="text-red-600  drop-shadow-md " />
           ) : (
             <FaRegHeart />

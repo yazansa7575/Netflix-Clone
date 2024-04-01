@@ -21,11 +21,10 @@ const UserProfile = () => {
   // curren tUser
   const { currentUser } = useContext(AuthContext);
   //get all movies [user List]
+
   useEffect(() => {
     onSnapshot(doc(db, "Users", currentUser?.email), (doc) => {
       setMovies(doc?.data()?.userList);
-      console.log("doc?.data()?.userList");
-      console.log(doc?.data()?.userList);
     });
   }, [currentUser?.email]);
 
@@ -43,37 +42,48 @@ const UserProfile = () => {
           My List
         </div>
       </div>
-      <div className="my-5">
+      <div className="my-4">
         <h2 className="p-3 my-3  pb-0 md:text-xl  text-white relative group z-[99]">
           My List
           <span className=" duration-150 mx-3  group-hover:w-[100px]  w-[10px] h-[2px] bg-red-600 absolute bottom-[-5px] left-0 "></span>
         </h2>
-        <div className=" relative">
-          <div
-            onClick={goLeft}
-            className=" absolute top-[50%] left-[2%] translate-y-[-50%] text-4xl font-bold    opacity-50 hover:opacity-100 cursor-pointer z-10"
-          >
-            <MdChevronLeft />
-          </div>
-          {/* slider  */}
-          <div
-            ref={slider}
-            className=" relative p-3 my-4 mt-0 w-full h-full  whitespace-nowrap scrollbar-hide  scroll-smooth overflow-x-scroll   "
-          >
-            {movies?.length > 0
-              ? movies.map((m, index) => {
-                  return <MovieCard data={m} key={index} />;
-                })
-              : ""}
-          </div>
-          {/* slider  */}
-          <div
-            onClick={goRight}
-            className=" absolute top-[50%] right-[2%] translate-y-[-50%] text-4xl font-bold    opacity-50 hover:opacity-100 cursor-pointer z-10"
-          >
-            <MdChevronRight />
-          </div>
-        </div>
+        {movies?.length > 0 ? (
+          <>
+            <div className=" relative">
+              <div
+                onClick={goLeft}
+                className=" absolute top-[50%] left-[2%] translate-y-[-50%] text-4xl font-bold    opacity-50 hover:opacity-100 cursor-pointer z-10"
+              >
+                <MdChevronLeft />
+              </div>
+              {/* slider  */}
+              <div
+                ref={slider}
+                className=" relative p-3 my-4 mt-0 w-full h-full  whitespace-nowrap scrollbar-hide  scroll-smooth overflow-x-scroll   "
+              >
+                {movies?.map((m, index) => {
+                  return (
+                    <MovieCard
+                      data={m}
+                      allMovie={movies}
+                      key={index}
+                      icon={"del"}
+                    />
+                  );
+                })}
+              </div>
+              {/* slider  */}
+              <div
+                onClick={goRight}
+                className=" absolute top-[50%] right-[2%] translate-y-[-50%] text-4xl font-bold    opacity-50 hover:opacity-100 cursor-pointer z-10"
+              >
+                <MdChevronRight />
+              </div>
+            </div>
+          </>
+        ) : (
+          <h3 className=" flex items-center justify-center text-2xl text-gray-500 ">...</h3>
+        )}
       </div>
     </div>
   );
